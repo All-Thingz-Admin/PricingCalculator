@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Thingz Admin - Pricing Calculator</title>
+    <style>
+      :root {
+        --primary-color: #2c3e50;
+        --secondary-color: #3498db;
+        --accent-color: #e74c3c;
+        --light-gray: #f5f6fa;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: var(--light-gray);
+      }
+
+      .calculator-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        border-bottom: 2px solid var(--light-gray);
+        padding-bottom: 20px;
+      }
+
+      .logo {
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      .logo img {
+        max-width: 300px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .logo-text {
+        font-family: "Arial", sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 3px;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        margin: 10px 0;
+      }
+
+      .section {
+        margin-bottom: 30px;
+        padding: 20px;
+        border: 1px solid #eee;
+        border-radius: 5px;
+      }
+
+      h2 {
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .input-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+
+      input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+
+      .checkbox-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+        margin: 15px 0;
+      }
+
+      .result {
+        background: var(--light-gray);
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 10px;
+        text-align: center;
+      }
+
+      button {
+        background: var(--secondary-color);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s;
+        display: block;
+        margin: 20px auto;
+        width: 200px;
+      }
+
+      button:hover {
+        background: var(--primary-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator-container">
+      <div class="header">
+        <div class="logo">
+          <!-- Primary logo image -->
+          <img
+            src="All Thingz Admin (Logo) (5).png"
+            alt="All Thingz Admin Logo"
+            onerror="this.style.display='none';document.querySelector('.logo-text').style.display='block';"
+          />
+          <!-- Fallback text logo -->
+          <div class="logo-text" style="display: none">ALL THINGZ ADMIN</div>
+        </div>
+        <h2>Pricing Calculator</h2>
+      </div>
+
+      <div class="section">
+        <h2>Monthly Business Expenses</h2>
+        <div class="input-group">
+          <label>Software/Tools ($)</label>
+          <input type="number" id="software" min="0" />
+        </div>
+        <div class="input-group">
+          <label>Insurance ($)</label>
+          <input type="number" id="insurance" min="0" />
+        </div>
+        <div class="input-group">
+          <label>Website/Hosting ($)</label>
+          <input type="number" id="website" min="0" />
+        </div>
+        <div class="input-group">
+          <label>Professional Development ($)</label>
+          <input type="number" id="development" min="0" />
+        </div>
+        <div class="input-group">
+          <label>Marketing ($)</label>
+          <input type="number" id="marketing" min="0" />
+        </div>
+        <div class="result">
+          <strong>Total Monthly Expenses: </strong>
+          <span id="totalExpenses">$0</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Time Availability</h2>
+        <div class="input-group">
+          <label>Total Hours Available per Month</label>
+          <input type="number" id="totalHours" min="0" />
+        </div>
+        <div class="input-group">
+          <label>Admin Time (hours)</label>
+          <input type="number" id="adminTime" min="0" />
+        </div>
+        <div class="input-group">
+          <label>Marketing Time (hours)</label>
+          <input type="number" id="marketingTime" min="0" />
+        </div>
+        <div class="result">
+          <strong>Available Client Hours: </strong>
+          <span id="availableHours">0</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Income Goals</h2>
+        <div class="input-group">
+          <label>Annual Income Goal ($)</label>
+          <input type="number" id="annualGoal" min="0" />
+        </div>
+        <div class="result">
+          <strong>Monthly Goal: </strong>
+          <span id="monthlyGoal">$0</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Services Offered</h2>
+        <div class="checkbox-group">
+          <label
+            ><input type="checkbox" value="emailManagement" /> Email
+            Management</label
+          >
+          <label
+            ><input type="checkbox" value="calendarManagement" /> Calendar
+            Management</label
+          >
+          <label
+            ><input type="checkbox" value="socialMedia" /> Social Media</label
+          >
+          <label
+            ><input type="checkbox" value="customerService" /> Customer
+            Service</label
+          >
+          <label
+            ><input type="checkbox" value="projectManagement" /> Project
+            Management</label
+          >
+          <label
+            ><input type="checkbox" value="bookkeeping" /> Bookkeeping</label
+          >
+        </div>
+      </div>
+
+      <button onclick="calculateRates()">Calculate Rates</button>
+
+      <div class="section">
+        <h2>Recommended Rates</h2>
+        <div class="result">
+          <strong>Base Hourly Rate: </strong>
+          <span id="baseRate">$0</span>
+        </div>
+        <div class="result">
+          <strong>Recommended Package Rates:</strong><br />
+          Basic Package (10 hrs): <span id="basicPackage">$0</span><br />
+          Standard Package (20 hrs): <span id="standardPackage">$0</span><br />
+          Premium Package (40 hrs): <span id="premiumPackage">$0</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function calculateRates() {
+        const software = Number(document.getElementById("software").value) || 0;
+        const insurance =
+          Number(document.getElementById("insurance").value) || 0;
+        const website = Number(document.getElementById("website").value) || 0;
+        const development =
+          Number(document.getElementById("development").value) || 0;
+        const marketing =
+          Number(document.getElementById("marketing").value) || 0;
+
+        const totalExpenses =
+          software + insurance + website + development + marketing;
+        document.getElementById(
+          "totalExpenses"
+        ).textContent = `$${totalExpenses.toFixed(2)}`;
+
+        const totalHours =
+          Number(document.getElementById("totalHours").value) || 0;
+        const adminTime =
+          Number(document.getElementById("adminTime").value) || 0;
+        const marketingTime =
+          Number(document.getElementById("marketingTime").value) || 0;
+        const availableHours = totalHours - adminTime - marketingTime;
+        document.getElementById("availableHours").textContent = availableHours;
+
+        const annualGoal =
+          Number(document.getElementById("annualGoal").value) || 0;
+        const monthlyGoal = annualGoal / 12;
+        document.getElementById(
+          "monthlyGoal"
+        ).textContent = `$${monthlyGoal.toFixed(2)}`;
+
+        const baseRate = ((monthlyGoal + totalExpenses) / availableHours) * 1.3;
+        document.getElementById("baseRate").textContent = `$${baseRate.toFixed(
+          2
+        )}`;
+
+        const basicPackage = baseRate * 10;
+        const standardPackage = baseRate * 20;
+        const premiumPackage = baseRate * 40;
+
+        document.getElementById(
+          "basicPackage"
+        ).textContent = `$${basicPackage.toFixed(2)}`;
+        document.getElementById(
+          "standardPackage"
+        ).textContent = `$${standardPackage.toFixed(2)}`;
+        document.getElementById(
+          "premiumPackage"
+        ).textContent = `$${premiumPackage.toFixed(2)}`;
+      }
+    </script>
+  </body>
+</html>
